@@ -1,0 +1,6 @@
+PGM
+  SNDPGMMSG MSG('Ciao, sono il modulo PART_A prima della chiamata')
+  CALLPRC PRC('PART_B')
+  SNDPGMMSG MSG('Ciao, sono il modulo PART_A dopo la chiamata')
+  DSPJOBLOG OUTPUT(*PRINT)
+ENDPGM

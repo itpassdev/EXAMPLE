@@ -1,0 +1,7 @@
+PGM
+  SNDPGMMSG MSG('Ciao, sono il modulo PART_B prima della chiamata') +
+    TOPGMQ(*PRV PART_A)
+  CALLPRC PRC('PART_C')
+  SNDPGMMSG MSG('Ciao, sono il modulo PART_B dopo la chiamata') +
+    TOPGMQ(*PRV PART_A)
+ENDPGM

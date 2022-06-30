@@ -1,0 +1,3 @@
+PGM
+  SNDPGMMSG MSG('Ciao, sono il modulo PART_C') TOPGMQ(*PRV PART_A)
+ENDPGM

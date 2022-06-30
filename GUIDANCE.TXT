@@ -1,0 +1,5 @@
+QCLSRC    BUILD     CLLE      BUILD CLLE auto-generated
+QCLSRC    PART_A    CLLE      Modulo chiamante
+QCLSRC    PART_B    CLLE      Modulo chiamato
+QCLSRC    PART_C    CLLE      Modulo chiamato
+QMAKSRC   BUILD     TXT       BUILD Makefile auto-generated
