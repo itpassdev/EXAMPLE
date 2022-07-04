@@ -42,3 +42,56 @@ PART_C.MODULE: PART_C.QCLSRC
       OUTPUT(*NONE)
 
 ```
+
+## METHODOLOGY
+
+The **PASERIE** library is made up of three tools:
+
+* PASERIE/INSTALL
+* PASERIE/LIBCLONE
+* PASERIE/INSTALLOC
+
+
+### PASERIE/INSTALL
+
+This tool installs GitHub repositories as IBM i native libraries that adhere to the following few conventions:
+
+* the repository includes a **GUIDANCE.TXT** file in the root of the repository
+* a **QCLSRC** sub\-directory exists in the root of the repository
+* a **BUILD.CLLE** ILE CL source file exists in the *QCLSRC* sub\-directory
+
+The INSTALL utility, having received the *GitHub user* and the *repository name*, downloads the file named *GUIDANCE.TXT* and interprets its rows as a list of source files to be downloaded.
+All the listed files are re\-created in **QTEMP**.
+Then the utility attempts to compile *QTEMP/QCLSRC(BUILD)* source member.
+If this compilation is successful the utility gives the generated executable direct control by calling it. 
+ 
+From this moment on the BUILD source code is responsible for how the installation will proceed.  
+
+
+### PASERIE/LIBCLONE
+
+This tool helps in developing the repository content so that all the accessory files are **auto\-generated**
+by cloning a native IBM i library only looking for source files and members included.
+
+
+### PASERIE/INSTALLOC
+
+This tool helps in testing locally the repository content, located in an IFS directory, installing the 
+library. The directory can be synchronized with a public (or private) GitHub repository so that standard
+installation can be finally tested with PASERIE/INSTALL.
+
+
+## SAME SOURCE, MULTIPLE TARGET VERSIONS
+
+One of the benefits is that PASERIE tools are available for IBM i 7.2, 7.3, 7.4 (and will be available for 7.5).
+This means that the same build process can be performed on different systems.
+
+## TMKMAKE
+
+Years ago an attempt was made by IBM i to implement a native **make** utility targetting IBM i native development.
+I have repackaged the tool using this same PASERIE utility to simplify installation.
+The latest version of PASERIE/LIBCLONE generates a *QTEMP/QMAKSRC(BUILD)* file.
+This service is limited to ILE CL source files. I am studying what could be required to implement a rudimentary
+**automake** logic targetting IBM i. 
+
+
