@@ -25,6 +25,7 @@ All:  PART_A
 PART_A: PART_A.MODULE PART_B.MODULE PART_C.MODULE
       CRTPGM PGM(&TGTLIB/PART_A) +
       MODULE(&BLDLIB/PART_A &BLDLIB/PART_B &BLDLIB/PART_C) +
+      
 
 PART_A.MODULE: PART_A.QCLSRC
       CRTCLMOD MODULE(&BLDLIB/PART_A) +
@@ -91,6 +92,38 @@ One of the benefits is that PASERIE tools are available for:
 * IBM i 7.5
 
 This means that the same build process can be performed on different systems.
+
+## TGTRLS
+
+By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE)` we will find a library `EXAMPLE`
+being created with a program `PART_A` inside.
+
+If our system is at V7R4 we will display (`DSPPGM PGM(EXAMPLE/PART_A)`):
+
+```
+ . . .
+ Release program created on . . . . . . . . . . :   V7R4M0 
+ Release program created for  . . . . . . . . . :   V7R4M0 
+ Earliest release program can run . . . . . . . :   V7R4M0 
+```
+
+By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(*PRV)` we will find that the program `PART_A` has been recreated:
+
+```
+ . . .
+ Release program created on . . . . . . . . . . :   V7R4M0 
+ Release program created for  . . . . . . . . . :   V7R3M0 
+ Earliest release program can run . . . . . . . :   V7R3M0 
+```
+
+By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(V7R2M0)` we will find that the program `PART_A` has been recreated:
+
+```
+ . . .
+ Release program created on . . . . . . . . . . :   V7R4M0 
+ Release program created for  . . . . . . . . . :   V7R2M0 
+ Earliest release program can run . . . . . . . :   V7R2M0 
+```
 
 ## TMKMAKE
 
