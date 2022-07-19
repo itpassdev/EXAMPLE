@@ -83,7 +83,13 @@ installation can be finally tested with PASERIE/INSTALL.
 
 ## SAME SOURCE, MULTIPLE TARGET VERSIONS
 
-One of the benefits is that PASERIE tools are available for IBM i 7.2, 7.3, 7.4 (and will be available for 7.5).
+One of the benefits is that PASERIE tools are available for:
+
+* IBM i 7.2
+* IBM i 7.3
+* IBM i 7.4 
+* IBM i 7.5
+
 This means that the same build process can be performed on different systems.
 
 ## TMKMAKE
