@@ -125,7 +125,7 @@ By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(V7R2
  Earliest release program can run . . . . . . . :   V7R2M0 
 ```
 
-The Makefile that implements this is different from the one before (note the 'TGTRLS(&TGTRLS)' option):
+The Makefile that implements this is different from the one before (note the **TGTRLS(&TGTRLS)** option):
 
 ```
 All:  PART_A 
