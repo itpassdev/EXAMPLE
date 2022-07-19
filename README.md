@@ -19,13 +19,13 @@ The conventional invocation of TMKMAKE from ILE CL BUILD script sets three macro
 
 This way the developer in charge of writing the Makefile (**QMAKSRC/BUILD.TXT**) can extend the role of **&SRCLIB**, **&BLDLIB** and **&TGTLIB**.
 
+
 ```
 All:  PART_A 
 
 PART_A: PART_A.MODULE PART_B.MODULE PART_C.MODULE
       CRTPGM PGM(&TGTLIB/PART_A) +
-      MODULE(&BLDLIB/PART_A &BLDLIB/PART_B &BLDLIB/PART_C) +
-      
+      MODULE(&BLDLIB/PART_A &BLDLIB/PART_B &BLDLIB/PART_C)      
 
 PART_A.MODULE: PART_A.QCLSRC
       CRTCLMOD MODULE(&BLDLIB/PART_A) +
@@ -123,6 +123,32 @@ By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(V7R2
  Release program created on . . . . . . . . . . :   V7R4M0 
  Release program created for  . . . . . . . . . :   V7R2M0 
  Earliest release program can run . . . . . . . :   V7R2M0 
+```
+
+The Makefile that implements this is different from the one before (note the 'TGTRLS(&TGTRLS)' option):
+
+```
+All:  PART_A 
+
+PART_A: PART_A.MODULE PART_B.MODULE PART_C.MODULE
+      CRTPGM PGM(&TGTLIB/PART_A) +
+      MODULE(&BLDLIB/PART_A &BLDLIB/PART_B &BLDLIB/PART_C) +
+      TGTRLS(&TGTRLS) 
+
+PART_A.MODULE: PART_A.QCLSRC
+      CRTCLMOD MODULE(&BLDLIB/PART_A) +
+      SRCFILE(&SRCLIB/QCLSRC) +
+      TGTRLS(&TGTRLS) OUTPUT(*NONE)
+
+PART_B.MODULE: PART_B.QCLSRC
+      CRTCLMOD MODULE(&BLDLIB/PART_B) +
+      SRCFILE(&SRCLIB/QCLSRC) +
+      TGTRLS(&TGTRLS) OUTPUT(*NONE)
+
+PART_C.MODULE: PART_C.QCLSRC
+      CRTCLMOD MODULE(&BLDLIB/PART_C) +
+      SRCFILE(&SRCLIB/QCLSRC) +
+      TGTRLS(&TGTRLS) OUTPUT(*NONE)
 ```
 
 ## TMKMAKE
