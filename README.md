@@ -9,15 +9,16 @@ Rather that describing (and issuing) all the build steps in the conventional **Q
 
 This way the build dependencies can be properly specified.
 
-The conventional invocation of TMKMAKE from ILE CL BUILD script sets three macros first:
+The conventional invocation of TMKMAKE from ILE CL BUILD script sets four macros:
 
 ```
  CHGVAR VAR(&MACRO1) VALUE('SRCLIB=' *CAT &SRCLIB)
  CHGVAR VAR(&MACRO2) VALUE('BLDLIB=' *CAT &BLDLIB)
  CHGVAR VAR(&MACRO3) VALUE('TGTLIB=' *CAT &TGTLIB)
+ CHGVAR VAR(&MACRO4) VALUE('TGTRLS=' *CAT &TGTRLS)
 ``` 
 
-This way the developer in charge of writing the Makefile (**QMAKSRC/BUILD.TXT**) can extend the role of **&SRCLIB**, **&BLDLIB** and **&TGTLIB**.
+This way the developer in charge of writing the Makefile (**QMAKSRC/BUILD.TXT**) can extend the role of **&SRCLIB**, **&BLDLIB**, **&TGTLIB** and **&TGTRLS**.
 
 
 ```
@@ -95,7 +96,7 @@ This means that the same build process can be performed on different systems.
 
 ## TGTRLS
 
-By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE)` we will find a library `EXAMPLE`
+By executing: `PASERIE/INSTALL REPO_OWNER(itpassdev) REPOSITORY(EXAMPLE)` we will find a library `EXAMPLE`
 being created with a program `PART_A` inside.
 
 If our system is at V7R4 we will display (`DSPPGM PGM(EXAMPLE/PART_A)`):
@@ -107,7 +108,7 @@ If our system is at V7R4 we will display (`DSPPGM PGM(EXAMPLE/PART_A)`):
  Earliest release program can run . . . . . . . :   V7R4M0 
 ```
 
-By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(*PRV)` we will find that the program `PART_A` has been recreated:
+By executing: `PASERIE/INSTALL REPO_OWNER(itpassdev) REPOSITORY(EXAMPLE) TGTRLS(*PRV)` we will find that the program `PART_A` has been recreated:
 
 ```
  . . .
@@ -116,7 +117,7 @@ By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(*PRV
  Earliest release program can run . . . . . . . :   V7R3M0 
 ```
 
-By executing: `PASERIE/INSTALL GIT_USER(itpassdev) PACKAGEN(EXAMPLE) TGTRLS(V7R2M0)` we will find that the program `PART_A` has been recreated:
+By executing: `PASERIE/INSTALL REPO_OWNER(itpassdev) REPOSITORY(EXAMPLE) TGTRLS(V7R2M0)` we will find that the program `PART_A` has been recreated:
 
 ```
  . . .
@@ -155,8 +156,10 @@ PART_C.MODULE: PART_C.QCLSRC
 
 Years ago an attempt was made by IBM i to implement a native **make** utility targetting IBM i native development.
 I have repackaged the tool using this same PASERIE utility to simplify installation.
-The latest version of PASERIE/LIBCLONE generates a *QTEMP/QMAKSRC(BUILD)* file.
-This service is limited to ILE CL source files. I am studying what could be required to implement a rudimentary
+The latest version of PASERIE/LIBCLONE generates a *QMAKSRC/BUILD.TXT* file.
+This service is limited to ILE CL source files. 
+
+I am studying what could be required to implement a rudimentary
 **automake** logic targetting IBM i. 
 
 
